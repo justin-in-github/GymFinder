@@ -19,6 +19,7 @@ const MongoDBStore = require("connect-mongo")(session);
 const userRoutes = require("./routes/users");
 const gymRoutes = require("./routes/gyms");
 const reviewRoutes = require("./routes/reviews");
+const portfolioRoutes = require("./routes/portfolio");
 const { default: contentSecurityPolicy } = require("helmet/dist/middlewares/content-security-policy");
 
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/gym-finder";
@@ -89,7 +90,9 @@ const styleSrcUrls = [
     "https://api.mapbox.com/",
     "https://api.tiles.mapbox.com/",
     "https://fonts.googleapis.com/",
+    "https://fonts.gstatic.com",
     "https://use.fontawesome.com/",
+    "https://cdnjs.cloudflare.com/"
 ];
 const connectSrcUrls = [
     "https://api.mapbox.com/",
@@ -97,7 +100,12 @@ const connectSrcUrls = [
     "https://b.tiles.mapbox.com/",
     "https://events.mapbox.com/",
 ];
-const fontSrcUrls = [];
+const fontSrcUrls = [
+    "https://fonts.googleapis.com",
+    "https://fonts.gstatic.com",
+    "https://cdnjs.cloudflare.com/"
+﻿
+];
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
@@ -135,6 +143,7 @@ app.use((req, res, next) => {
 app.use("/", userRoutes);
 app.use("/gyms", gymRoutes)
 app.use("/gyms/:id/reviews", reviewRoutes)
+app.use("/", portfolioRoutes)
 
 
 app.get("/", (req, res) => {
