@@ -6,7 +6,5 @@ const catchAsync = require("../utils/catchAsync");
 
 router.get("/portfolio", catchAsync(portfolio.index))
 router.get("/portfolio1", catchAsync(portfolio.portfolio_item_1))
-// router.get("/portfolio/gymfinder", catchAsync(portfolio.portfolio_item_1))
-
 
 module.exports = router;

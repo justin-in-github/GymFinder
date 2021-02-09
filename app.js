@@ -140,14 +140,18 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use("/", userRoutes);
-app.use("/gyms", gymRoutes)
-app.use("/gyms/:id/reviews", reviewRoutes)
+// app.use("/gymfinder", homeRoute);
+app.use("/gymfinder", userRoutes);
+app.use("/gymfinder/gyms", gymRoutes)
+app.use("/gymfinder/gyms/:id/reviews", reviewRoutes)
 app.use("/", portfolioRoutes)
 
 
 app.get("/", (req, res) => {
-    res.render("home")
+    res.render("portfolio/index")
+});
+app.get("/gymfinder", (req, res) => {
+    res.render("home/home")
 });
 
 

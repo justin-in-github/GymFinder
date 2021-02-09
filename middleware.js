@@ -7,7 +7,7 @@ module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
         req.session.returnTo = req.originalUrl
         req.flash("error", "You must be signed in first!");
-        return res.redirect("/login");
+        return res.redirect("/gymfinder/login");
     }
     next();
 }
@@ -27,7 +27,7 @@ module.exports.isAuthor = async (req, res, next) => {
     const gym = await Gym.findById(id);
     if (!gym.author.equals(req.user._id)) {
         req.flash("error", "You do not have permission to do that!");
-        return res.redirect(`/gyms/${id}`);
+        return res.redirect(`/gymfinder/gyms/${id}`);
     }
     next();
 }
@@ -37,7 +37,7 @@ module.exports.isReviewAuthor = async (req, res, next) => {
     const review = await Review.findById(reviewId);
     if (!review.author.equals(req.user._id)) {
         req.flash("error", "You do not have permission to do that!");
-        return res.redirect(`/gyms/${id}`);
+        return res.redirect(`/gymfinder/gyms/${id}`);
     }
     next();
 }

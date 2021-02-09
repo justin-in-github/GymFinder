@@ -9,7 +9,7 @@ module.exports.createReview = async (req, res) => {
     await review.save();
     await gym.save();
     req.flash("success", "Created new review!");
-    res.redirect(`/gyms/${gym._id}`);
+    res.redirect(`/gymfinder/gyms/${gym._id}`);
 }
 
 module.exports.deleteReview = async (req, res) => {
@@ -17,5 +17,5 @@ module.exports.deleteReview = async (req, res) => {
     await Gym.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
     req.flash("success", "Successfully deleted review")
-    res.redirect(`/gyms/${id}`);
+    res.redirect(`/gymfinder/gyms/${id}`);
 }

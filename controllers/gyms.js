@@ -23,7 +23,7 @@ module.exports.createGym = async (req, res, next) => {
     gym.author = req.user._id;
     await gym.save();
     req.flash("success", "Successfully added a new gym!");
-    res.redirect(`/gyms/${gym._id}`)
+    res.redirect(`/gymfinder/gyms/${gym._id}`)
 }
 
 module.exports.showGym = async (req, res,) => {
@@ -35,7 +35,7 @@ module.exports.showGym = async (req, res,) => {
     }).populate("author");
     if (!gym) {
         req.flash("error", "Cannot find that gym!");
-        return res.redirect("/gyms");
+        return res.redirect("/gymfinder/gyms");
     }
     res.render("gyms/show", { gym });
 }
@@ -45,7 +45,7 @@ module.exports.renderEditForm = async (req, res) => {
     const gym = await Gym.findById(id)
     if (!gym) {
         req.flash("error", "Cannot find that gym!");
-        return res.redirect("/gyms");
+        return res.redirect("/gymfinder/gyms");
     }
     res.render("gyms/edit", { gym });
 }
@@ -60,12 +60,12 @@ module.exports.updateGym = async (req, res) => {
         await gym.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } })
     }
     req.flash("success", "Successfully updated gym!");
-    res.redirect(`/gyms/${gym._id}`)
+    res.redirect(`/gymfinder/gyms/${gym._id}`)
 }
 
 module.exports.deleteGym = async (req, res) => {
     const { id } = req.params;
     await Gym.findByIdAndDelete(id);
     req.flash("success", "Successfully deleted gym")
-    res.redirect("/gyms");
+    res.redirect("/gymfinder/gyms");
 }
