@@ -413,7 +413,7 @@ header {
   background-position: center;
   height: 300px;
   width: inherit;
-  background-image: url("/imgs/index_gymfinder.png");
+  background-image: url("/imgs/index_gymfinder.PNG");
   transition: transform 750ms cubic-bezier(0.5, 0, 0.5, 1), opacity 250ms linear;
 }
 
