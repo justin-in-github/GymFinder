@@ -107,7 +107,7 @@ const fontSrcUrls = [
     "https://fonts.googleapis.com",
     "https://fonts.gstatic.com",
     "https://cdnjs.cloudflare.com/"
-﻿
+
 ];
 app.use(
     helmet.contentSecurityPolicy({
@@ -144,23 +144,22 @@ app.use((req, res, next) => {
 })
 
 app.use("/", portfolioRoutes)
-// app.use("/gymfinder", homeRoute);
 app.use("/gymfinder", userRoutes);
 app.use("/gymfinder/gyms", gymRoutes)
 app.use("/gymfinder/gyms/:id/reviews", reviewRoutes)
 
 
-    app.get("/", (req, res) => {
-        res.render("portfolio/index")
-    });
-    app.get("/gymfinder", (req, res) => {
-        res.render("home/home")
-    });
+app.get("/", (req, res) => {
+    res.render("portfolio/index")
+});
 
-app.use("/burgerbuilder", express.static(path.join(__dirname, "build")))
+app.get("/gymfinder", (req, res) => {
+    res.render("home/home")
+});
+
 app.get('/burgerbuilder/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  });
+});
 
 app.all("*", (req, res, next) => {
     next(new ExpressError("Page Not Found", 404))
