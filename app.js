@@ -46,16 +46,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "build")))
+app.use("/burgerbuilder", express.static(path.join(__dirname, "build")))
 
-// app.use(express.static(path.join(__dirname, "public", "build")))
 app.use(mongoSanitize())
-
-// app.get('/burgerbuilder', function (req, res) {
-//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-//   });
-
-
 
 const secret = process.env.SECRET || "mySecret123!"
 
@@ -150,21 +143,22 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use("/", portfolioRoutes)
 // app.use("/gymfinder", homeRoute);
 app.use("/gymfinder", userRoutes);
 app.use("/gymfinder/gyms", gymRoutes)
 app.use("/gymfinder/gyms/:id/reviews", reviewRoutes)
-app.use("/", portfolioRoutes)
 
 
-app.get("/", (req, res) => {
-    res.render("portfolio/index")
-});
-app.get("/gymfinder", (req, res) => {
-    res.render("home/home")
-});
+    app.get("/", (req, res) => {
+        res.render("portfolio/index")
+    });
+    app.get("/gymfinder", (req, res) => {
+        res.render("home/home")
+    });
 
-app.get('/burgerbuilder', function (req, res) {
+app.use("/burgerbuilder", express.static(path.join(__dirname, "build")))
+app.get('/burgerbuilder/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });
 
@@ -177,17 +171,6 @@ app.use((err, req, res, next) => {
     if (!err.message) err.message = "Oh No, Something Went Wrong!"
     res.status(statusCode).render("error", { err })
 })
-
-
-//no change if in there or not.....
-// app.get('/test', function (req, res) {
-//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-//   });
-
-//also no change if in there or not.....
-// app.use((req, res, next) => {
-//     res.sendFile(path.join(__dirname, "build", "index.html"));
-//   });
 
 const port = process.env.PORT || 3000;
 
