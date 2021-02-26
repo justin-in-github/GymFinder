@@ -400,21 +400,49 @@ header {
 .portfolio {
   display: flex;
   width: 100%;
-  height: auto;
+  margin-bottom: 10px;
 }
 
-.portfolio__item {
+.portfolio__link {
   background: var(--clr-accent);
   overflow: hidden;
   width: inherit;
+}
+
+.portfolio__item {
+  position: relative;
+  text-align: center;
+  color: white;
 }
 
 .portfolio__img {
   background-position: center;
   height: 300px;
   width: inherit;
-  background-image: url("/imgs/index_gymfinder.PNG");
   transition: transform 750ms cubic-bezier(0.5, 0, 0.5, 1), opacity 250ms linear;
+}
+
+.portfolio__img-description {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  color: var(--clr-light);
+  font-size: var(--fs-h2);
+  /* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; */
+  transform: translate(-50%, -50%);
+}
+
+.img-gymfinder {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  url("/imgs/index_gymfinder.jpg");
+  background-size: cover;
+
+}
+
+.img-burgerbuilder {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/imgs/index_burgerbuilder2.jpg");
+  background-size: cover;
 }
 
 .portfolio__item:focus {
